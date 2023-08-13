@@ -85,7 +85,7 @@ class AdminMiddleware(BaseMiddleware):
                 raise CancelHandler()
         elif message.text == '/start' and str(message.from_user.id) not in await admins.get_admins():  # /start для учеников определяется тут
             await message.answer("Добро пожаловать в наш бот!", reply_markup=student_kb)
-            await message.answer("Ваш телеграм ID —", str(message.from_user.id))
+            await message.answer(text="Ваш телеграм ID — " + str(message.from_user.id))
             raise CancelHandler()
 
 
