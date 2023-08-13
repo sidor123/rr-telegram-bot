@@ -1,4 +1,4 @@
-TOKEN_API = "6173466157:AAFohJW6xeRRvwM6bPO2FXvrppue_hiU9VM"
+TOKEN_API = "6671116115:AAHIDvhp4-xdMI9HtcUxcJVqSBAt9P-qN9A"
 HELP_COMMAND = """
 <b>/start</b> - <em>начало нашей работы</em>
 <b>/help</b> - <em>вывести список команд</em>
