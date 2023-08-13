@@ -100,7 +100,7 @@ async def check_jobs():  # обновление работы шедулера
         if date >= datetime.now():  # если дата занятия позже текущей даты более чем на день
             scheduler.add_job(apsched.send_message_to_students, trigger='date',  # добавляем в шедулер уведомление
                               run_date=date,
-                              args=[data[-1]])
+                              args=[data[-3]])
 
 
 @dp.message_handler(text='отмена', state='*')  # отменяет любую выполняемую операцию
