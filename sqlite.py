@@ -1,11 +1,12 @@
-import sqlite3 as sq
+import psycopg2
 from datetime import datetime, timedelta
 
+DB_URL = "postgresql://postgres:UBtN5dj9i4o3le1L08lT@containers-us-west-45.railway.app:7308/railway"
 
 class Database:
     def __init__(self):
         global db, cur
-        db = sq.connect('new.db')
+        db = psycopg2.connect(DB_URL, sslmode="require")
         cur = db.cursor()
 
 
