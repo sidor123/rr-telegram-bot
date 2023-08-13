@@ -527,15 +527,19 @@ async def admin_accept(message: types.Message, state: FSMContext) -> None:
 @dp.message_handler(text='список занятий')  # выводит список занятий ученика
 async def cmd_start(message: types.Message, state: FSMContext) -> None:
     if not await students.check_a_by_b('group_id', 'telegram_id', message.from_user.id):  # если ученика нет в списке
-        if message.from_user.id != ADMIN:  # если юзер не администратор
+        if str(message.from_user.id) not in admins.get_admins():  # если юзер не администратор
             await message.answer("❌ Вас <b>нет</b> в списке учеников!", reply_markup=student_kb, parse_mode='HTML')
             return
         await cmd_cancel(message, state, "❌ Вас <b>нет</b> в списке учеников!")  # если команду ввёл администратор
         return
     elif not (await lessons.see_entry((await students.check_a_by_b('group_id', 'telegram_id',
                                                                    message.from_user.id))[0][0])):  # если нет занятий
-        await cmd_cancel(message, state, "❌ У вас <b>нет</b> закреплённых занятий!")
-        return
+        if str(message.from_user.id) not in admins.get_admins():
+            await message.answer(text="❌ У вас <b>нет</b> закреплённых занятий!", reply_markup=student_kb)
+            return
+        else:
+            await cmd_cancel(message, state, "❌ У вас <b>нет</b> закреплённых занятий!")
+            return
     lessons_info = await (lessons.see_entry((await students.check_a_by_b('group_id', 'telegram_id',
                                                                          message.from_user.id))[0][0]))
     lessons_data = []
