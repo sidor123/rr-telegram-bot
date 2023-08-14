@@ -65,8 +65,6 @@ class Lessons:
             cur.execute(f"SELECT {desired_entry} FROM lessons WHERE {conditional_entry} = {entry_data}")
             if conditional_entry == "group_id":
                 for data in cur.fetchall():
-                    print(data, (datetime(data[3], data[2], data[1], int(str(data[4])[:-2]), int(str(data[4])[-2:])) - timedelta(days=1)), datetime(datetime.now().year, datetime.now().month, datetime.now().day, datetime.now().hour,
-                                     datetime.now().minute))
                     if (datetime(data[3], data[2], data[1], int(str(data[4])[:-2]), int(str(data[4])[-2:])) - timedelta(days=1)) ==\
                             (datetime(datetime.now().year, datetime.now().month, datetime.now().day, datetime.now().hour,
                                     datetime.now().minute) + timedelta(hours=5)):
