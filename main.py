@@ -95,7 +95,6 @@ async def on_startup(_):
 
 async def check_jobs():  # обновление работы шедулера
     for data in await lessons.see_entry("*"):  # берем данные всех занятий
-        print(data)
         date = datetime(data[3], data[2], data[1], int(str(data[4][:-2])), int(str(data[4][-2:]))) - timedelta(days=1)
         if date >= datetime.now():  # если дата занятия позже текущей даты более чем на день
             scheduler.add_job(apsched.send_message_to_students, trigger='date',  # добавляем в шедулер уведомление
