@@ -27,7 +27,8 @@ class Lessons:
 
     async def add_entry(self, state):
         async with state.proxy() as data:
-            cur.execute(f"INSERT INTO lessons VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            cur.execute(f"INSERT INTO lessons (day, month, year, time, subject, description, group_id, "
+                        f"present_students, not_present_students) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
                         (data['day'], data['month'], data['year'], data['time'], data['subject'], data['desc'],
                          data['group_id'], "/", "/"))
         db.commit()
