@@ -72,9 +72,8 @@ class Lessons:
         return cur.fetchall()
 
     async def set_students_presence(self, presence, student_id, lesson_id):
-        print(lesson_id, cur.execute(f"SELECT present_students FROM lessons where id = {lesson_id}"))
-        present_record = cur.execute(f"SELECT present_students FROM lessons where id = {lesson_id}").fetchone()[0]
-        non_present_record = cur.execute(f"SELECT not_present_students FROM lessons where id = {lesson_id}").fetchone()[0]
+        present_record = cur.execute("SELECT present_students FROM lessons where id = %s", (lesson_id, )).fetchone()[0]
+        non_present_record = cur.execute("SELECT not_present_students FROM lessons where id = %s", (lesson_id, )).fetchone()[0]
         if presence:
             if str(student_id) in non_present_record.split('/'):
                 non_present_record = non_present_record.replace(str(student_id) + '/', '')
@@ -87,8 +86,8 @@ class Lessons:
             if str(student_id) not in non_present_record.split('/'):
                 non_present_record += str(student_id)
                 non_present_record += '/'
-        cur.execute(f"UPDATE lessons SET not_present_students = '{non_present_record}' WHERE id = {lesson_id}")
-        cur.execute(f"UPDATE lessons SET present_students = '{present_record}' WHERE id = {lesson_id}")
+        cur.execute("UPDATE lessons SET not_present_students = '%s' WHERE id = %s", (not_present_record, lesson_id))
+        cur.execute("UPDATE lessons SET present_students = '%s' WHERE id = %s", (present_record, lesson_id))
         db.commit()
 
 
