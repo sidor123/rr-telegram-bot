@@ -1,7 +1,7 @@
 import psycopg2
 from datetime import datetime, timedelta
 
-DB_URL = "postgresql://postgres:UBtN5dj9i4o3le1L08lT@containers-us-west-45.railway.app:7308/railway"
+DB_URL = "postgresql://postgres:m8bZUdcT9BRGyzTHhfgn@containers-us-west-135.railway.app:7528/railway"
 
 class Database:
     def __init__(self):
