@@ -466,16 +466,16 @@ async def check_activity(message: types.Message) -> None:
         for student_id in present_students_id[0][0].split('/'):  # берем телеграм id из списка присутствующих
             if student_id:  # добавляем имя и фамилию учеников в созданный список
                 if present_students:
-                    present_students.append((await Students().check_a_by_b('name, surname', 'telegram_id', student_id))[0])
+                    present_students.append((await Students().check_a_by_b('name, surname', 'telegram_id', str(student_id)))[0])
                 else:
                     # тут создаётся список
-                    present_students = await Students().check_a_by_b('name, surname', 'telegram_id', student_id)
+                    present_students = await Students().check_a_by_b('name, surname', 'telegram_id', str(student_id))
         for student_id in not_present_students_id[0][0].split('/'):  # тут берем из списка отсутствующих
             if student_id:
                 if not_present_students:
-                    not_present_students.append((await Students().check_a_by_b('name, surname', 'telegram_id', student_id))[0])
+                    not_present_students.append((await Students().check_a_by_b('name, surname', 'telegram_id', str(student_id)))[0])
                 else:
-                    not_present_students = await Students().check_a_by_b('name, surname', 'telegram_id', student_id)
+                    not_present_students = await Students().check_a_by_b('name, surname', 'telegram_id', str(student_id))
         # ниже перебираем учеников из двух списков, что убрать лишние имена из списка "неопределенных"
         for n in range(len(present_students)):
             if present_students[n] in undefined_students:  # убираем присутствующих
