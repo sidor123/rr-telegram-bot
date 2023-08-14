@@ -12,6 +12,8 @@ class Database:
 
 async def check_time(fetcher):
     for data in fetcher:
+        print(data, (datetime(data[3], data[2], data[1], int(str(data[4])[:-2]), int(str(data[4])[-2:])) - timedelta(days=1)), datetime(datetime.now().year, datetime.now().month, datetime.now().day, datetime.now().hour,
+                         datetime.now().minute))
         if (datetime(data[3], data[2], data[1], int(str(data[4])[:-2]), int(str(data[4])[-2:])) - timedelta(days=1)) ==\
                 datetime(datetime.now().year, datetime.now().month, datetime.now().day, datetime.now().hour,
                          datetime.now().minute):
