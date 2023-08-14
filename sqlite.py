@@ -10,16 +10,6 @@ class Database:
         cur = db.cursor()
 
 
-async def check_time(fetcher):
-    for data in fetcher:
-        print(data, (datetime(data[3], data[2], data[1], int(str(data[4])[:-2]), int(str(data[4])[-2:])) - timedelta(days=1)), datetime(datetime.now().year, datetime.now().month, datetime.now().day, datetime.now().hour,
-                         datetime.now().minute))
-        if (datetime(data[3], data[2], data[1], int(str(data[4])[:-2]), int(str(data[4])[-2:])) - timedelta(days=1)) ==\
-                datetime(datetime.now().year, datetime.now().month, datetime.now().day, datetime.now().hour,
-                         datetime.now().minute):
-            return data
-
-
 class Lessons:
     def __init__(self):
         cur.execute("CREATE TABLE IF NOT EXISTS lessons(id INTEGER PRIMARY KEY, day INTEGER, month INTEGER,"
@@ -78,8 +68,8 @@ class Lessons:
                     print(data, (datetime(data[3], data[2], data[1], int(str(data[4])[:-2]), int(str(data[4])[-2:])) - timedelta(days=1)), datetime(datetime.now().year, datetime.now().month, datetime.now().day, datetime.now().hour,
                                      datetime.now().minute))
                     if (datetime(data[3], data[2], data[1], int(str(data[4])[:-2]), int(str(data[4])[-2:])) - timedelta(days=1)) ==\
-                            datetime(datetime.now().year, datetime.now().month, datetime.now().day, datetime.now().hour,
-                                    datetime.now().minute):
+                            (datetime(datetime.now().year, datetime.now().month, datetime.now().day, datetime.now().hour,
+                                    datetime.now().minute) + timedelta(hours=5)):
                         return data
         return cur.fetchall()
 
