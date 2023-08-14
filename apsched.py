@@ -4,7 +4,7 @@ from main import bot, lessons, students
 
 
 async def send_message_to_students(*data):
-    info = await lessons.check_a_by_b('*', 'group_id', data[0])
+    info = await lessons.check_a_by_b('*', 'group_id', int(data[0]))
     print(info, data)
     for row in await students.check_a_by_b('*', 'group_id', data[0]):
         inline_kb = InlineKeyboardMarkup().add(InlineKeyboardButton(text="✔", callback_data=str(info[0])),
