@@ -75,8 +75,10 @@ class Lessons:
         cur.execute("SELECT * FROM lessons")
         record = cur.fetchall()
         print(record)
-        present_record = cur.execute("SELECT present_students FROM lessons where id = '%s'", (lesson_id, )).fetchall()[0]
-        non_present_record = cur.execute("SELECT not_present_students FROM lessons where id = '%s'", (lesson_id, )).fetchall()[0]
+        cur.execute("SELECT present_students FROM lessons where id = '%s'", (lesson_id, ))
+        present_record = cur.fetchone()[0]
+        cur.execute("SELECT not_present_students FROM lessons where id = '%s'", (lesson_id, ))
+        non_present_record = cur.fetchone()[0]
         if presence:
             if str(student_id) in non_present_record.split('/'):
                 non_present_record = non_present_record.replace(str(student_id) + '/', '')
