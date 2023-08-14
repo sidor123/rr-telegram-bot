@@ -72,9 +72,6 @@ class Lessons:
         return cur.fetchall()
 
     async def set_students_presence(self, presence, student_id, lesson_id):
-        cur.execute("SELECT * FROM lessons")
-        record = cur.fetchall()
-        print(record)
         cur.execute("SELECT present_students FROM lessons where id = '%s'", (lesson_id, ))
         present_record = cur.fetchone()[0]
         cur.execute("SELECT not_present_students FROM lessons where id = '%s'", (lesson_id, ))
@@ -91,7 +88,7 @@ class Lessons:
             if str(student_id) not in non_present_record.split('/'):
                 non_present_record += str(student_id)
                 non_present_record += '/'
-        cur.execute("UPDATE lessons SET not_present_students = '%s' WHERE id = %s", (not_present_record, lesson_id))
+        cur.execute("UPDATE lessons SET not_present_students = '%s' WHERE id = %s", (non_present_record, lesson_id))
         cur.execute("UPDATE lessons SET present_students = '%s' WHERE id = %s", (present_record, lesson_id))
         db.commit()
 
