@@ -72,6 +72,7 @@ class Lessons:
         return cur.fetchall()
 
     async def set_students_presence(self, presence, student_id, lesson_id):
+        print(lesson_id, cur.execute(f"SELECT present_students FROM lessons where id = {lesson_id}"))
         present_record = cur.execute(f"SELECT present_students FROM lessons where id = {lesson_id}").fetchone()[0]
         non_present_record = cur.execute(f"SELECT not_present_students FROM lessons where id = {lesson_id}").fetchone()[0]
         if presence:
