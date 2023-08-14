@@ -62,7 +62,10 @@ class Lessons:
         if conditional_entry == '-' and entry_data == '-':
             cur.execute(f"SELECT {desired_entry} FROM lessons")
         else:
-            cur.execute(f"SELECT {desired_entry} FROM lessons WHERE {conditional_entry} = {entry_data}")
+            if entry_data == str(entry_data):
+                cur.execute(f"SELECT {desired_entry} FROM lessons WHERE {conditional_entry} = '{entry_data}'")
+            else:
+                cur.execute(f"SELECT {desired_entry} FROM lessons WHERE {conditional_entry} = {entry_data}")
             if conditional_entry == "group_id":
                 for data in cur.fetchall():
                     if (datetime(data[3], data[2], data[1], int(str(data[4])[:-2]), int(str(data[4])[-2:])) - timedelta(days=1)) ==\
