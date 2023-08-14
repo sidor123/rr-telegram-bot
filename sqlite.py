@@ -122,7 +122,7 @@ class Students:
         db.commit()
 
     async def check_a_by_b(self, desired_entry, conditional_entry, entry_data):
-        cur.execute(f"SELECT {desired_entry} FROM students WHERE {conditional_entry} = {entry_data}")
+        cur.execute(f"SELECT {desired_entry} FROM students WHERE {conditional_entry} = '{entry_data}'")
         return cur.fetchall()
 
 
