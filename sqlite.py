@@ -71,8 +71,9 @@ class Lessons:
             cur.execute(f"SELECT {desired_entry} FROM lessons")
         else:
             cur.execute(f"SELECT {desired_entry} FROM lessons WHERE {conditional_entry} = {entry_data}")
-        if conditional_entry == "group_id":
-            return await check_time(cur.fetchall())
+            if conditional_entry == "group_id":
+                print(cur.fetchall(), await check_time(cur.fetchall()))
+                return await check_time(cur.fetchall())
         return cur.fetchall()
 
     async def set_students_presence(self, presence, student_id, lesson_id):
