@@ -103,7 +103,7 @@ class Students:
 
     async def add_entry(self, state):
         async with state.proxy() as data:
-            cur.execute("INSERT INTO students VALUES(NULL, ?, ?, ?, ?)",
+            cur.execute("INSERT INTO students (name, surname, telegram_id, group_id) VALUES (%s, %s, %s, %s)",
                         (data['name'], data['surname'], data['telegram_id'], data['group_id']))
         db.commit()
 
@@ -134,7 +134,7 @@ class Admins:
         db.commit()
 
     async def add_new(self, telegram_id):
-        cur.execute("INSERT INTO admins VALUES(NULL, ?)",
+        cur.execute("INSERT INTO admins (telegram_id) VALUES (%s)",
                     (telegram_id, ))
         db.commit()
 
